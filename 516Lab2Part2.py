@@ -1,14 +1,18 @@
+# This Program calculates the pressure difference as a function of a manometer deflection and angle
+
 import math
-mono_deflection = float(input('Enter the monometer deflection?'))
+mono_deflection = input('Enter the monometer deflection? (Seperated by commas)').split(
+    ',')  # Manometer deflection in mm and split with comma
+# manometer angel with horizontal in degrees
 mono_angle = float(input('Enter the angle of monometer?'))
-mono_angle = math.radians(mono_angle)
-y_water = 9790
+mono_angle = math.radians(mono_angle)  # convert degrees to Radians
+y_water = 9790  # Specific weight of water
 
 pressure_dif = []
-while mono_deflection != 0:
-    delta_p = (y_water) * (mono_deflection*(10**-3)) * math.sin(mono_angle)
+for deflection in mono_deflection:
+    deflection = float(deflection)
+    delta_p = (y_water) * (deflection*(10**-3)) * math.sin(mono_angle)
     pressure_dif.append(round(delta_p, 2))
-    mono_deflection = float(input('Enter the monometer deflection'))
 
 for i in pressure_dif:
     print(i)
